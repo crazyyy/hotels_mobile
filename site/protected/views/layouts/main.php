@@ -1,4 +1,5 @@
 <?php /* @var $this Controller */ ?>
+<!-- ready -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -40,13 +41,13 @@
 
   <footer>
     <ul>
-        <li><a href="#">О нас</a></li>
-        <li><a href="#">Помощь</a></li>
-        <li><a href="#">Конфиденциальность</a></li>
-        <li><a href="/site/contacts">Контакты</a></li>
+      <li><a href="#">О нас</a></li>
+      <li><a href="#">Помощь</a></li>
+      <li><a href="/site/contacts">Контакты</a></li>
+      <li><a href="#">Конфиденциальность</a></li>
     </ul>
-    <p class="copyright">Copyright © 2010 - 2014 ООО "Свит Дрим Украина"<br>
-          Все права защищены.</p>
+  <!--   <p class="copyright">Copyright © 2010 - 2014 ООО "Свит Дрим Украина"<br>
+        Все права защищены.</p> -->
   </footer><!-- footer -->
 
 </div><!-- page -->

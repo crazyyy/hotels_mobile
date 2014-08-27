@@ -1,7 +1,0 @@
-2014-08-27 18:06:23: -- Analysis Started by On File Change Incremental
-2014-08-27 18:06:23: Changes: 1, Conflicts: 0, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 7
-2014-08-27 18:06:23: Left to Right: Copy File: 1 
-2014-08-27 18:06:23: == Sync Started by On File Change Incremental
-2014-08-27 18:06:23: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/main.css' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/main.css'
-2014-08-27 18:06:23: == Sync Complete. Time: 00:00:00, Speed: 0 байт/s, OK: 1, Errors: 0
-2014-08-27 18:06:24: 
