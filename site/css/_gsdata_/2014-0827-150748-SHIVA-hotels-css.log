@@ -1,0 +1,30 @@
+2014-08-27 15:07:48: -- Analysis Started by User
+2014-08-27 15:07:48: L: State file does not exist: D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/_gsdata_/_file_state_v4._gs
+2014-08-27 15:07:48: R: State file does not exist: ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/_gsdata_/_file_state_v4._gs
+2014-08-27 15:07:48: /bg.gif: Conflict: New files that differ
+2014-08-27 15:07:48: /form.css: Conflict: New files that differ
+2014-08-27 15:07:48: /ie.css: Conflict: New files that differ
+2014-08-27 15:07:48: /main.css: Conflict: New files that differ
+2014-08-27 15:07:48: /print.css: Conflict: New files that differ
+2014-08-27 15:07:48: /screen.css: Conflict: New files that differ
+2014-08-27 15:07:48: Analyze has finished with Conflicts. Resolve Conflicts by selecting the correct sync direction, then click Sync
+2014-08-27 15:07:48: Changes: 6, Conflicts: 6, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 6
+2014-08-27 15:07:48: -- Analysis Complete. Time 00:00:00, Speed: Many files/s
+2014-08-27 15:07:48: 
+2014-08-27 15:08:06: === User Changed Action from 'CONFLICT' to 'COPY_LEFT_TO_RIGHT' on item /bg.gif
+2014-08-27 15:08:06: === User Changed Action from 'CONFLICT' to 'COPY_LEFT_TO_RIGHT' on item /form.css
+2014-08-27 15:08:06: === User Changed Action from 'CONFLICT' to 'COPY_LEFT_TO_RIGHT' on item /ie.css
+2014-08-27 15:08:06: === User Changed Action from 'CONFLICT' to 'COPY_LEFT_TO_RIGHT' on item /main.css
+2014-08-27 15:08:06: === User Changed Action from 'CONFLICT' to 'COPY_LEFT_TO_RIGHT' on item /print.css
+2014-08-27 15:08:06: === User Changed Action from 'CONFLICT' to 'COPY_LEFT_TO_RIGHT' on item /screen.css
+2014-08-27 15:08:06: Done.
+2014-08-27 15:08:09: New _gsdata_ folder(s) created, so rescan all job folders for their ghosts
+2014-08-27 15:08:09: == Sync Started by User
+2014-08-27 15:08:09: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/bg.gif' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/bg.gif' (User Action)
+2014-08-27 15:08:09: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/form.css' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/form.css' (User Action)
+2014-08-27 15:08:09: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/ie.css' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/ie.css' (User Action)
+2014-08-27 15:08:09: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/main.css' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/main.css' (User Action)
+2014-08-27 15:08:09: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/print.css' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/print.css' (User Action)
+2014-08-27 15:08:09: Copy Over 'D:/Dyandex/work/ria/vagrant/www/hotels_mobile/site/css/screen.css' -> 'ftp://mic.riamm.vn.ua:9022/www/opera_mini/site/css/screen.css' (User Action)
+2014-08-27 15:08:10: == Sync Complete. Time: 00:00:01, Speed: 0 байт/s, OK: 6, Errors: 0
+2014-08-27 15:08:10: 

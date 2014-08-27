@@ -1,0 +1,14 @@
+#!/bin/bash
+# This script configures FS privileges for Symfony2 project.
+
+APP_PATH=/home/developer/www/mercurial/hotels_mobile
+
+HTTP_USER=www-data
+CLI_USER=developer
+
+echo "Running post-installation triggers."
+
+echo 'Setting correct acl.'
+sudo setfacl -R -m u:"$HTTP_USER":rwX -m u:$CLI_USER:rwX $APP_PATH/app/cache $APP_PATH/site
+
+echo 'Done.'
