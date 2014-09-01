@@ -1,42 +1,43 @@
 <?if($data):?>
-
-<h2><img src="<?=$img?>" alt="" class="dispIB padR10"><?=$label?></h2>
-<?$sessionData=Yii::app()->session['cityHotelsIds']?>
-<?foreach($data as $one):?>
+  <h2 class="<?=$prop?>"><?=$label?></h2>
+  <?$sessionData=Yii::app()->session['cityHotelsIds']?>
+  <?foreach($data as $one):?>
     <?$href='';
       $id='';
         if(isset($one['cityId'])){
             $href="/hotels/byCity";
             $id=$one['cityId'];
             $sessionData['cityId-'.$id]=$one['cityName'];
-
+            $blockStyle ="city_style";
         }
-
         else if(isset($one['regionId'])){
             $href="/hotels/byRegion";
             $id=$one['regionId'];
             $sessionData['regionId-'.$id]=$one['regionName']." обл.";
+            $blockStyle ="region_style";
         }
         else if(isset($one['hotelId'])){
             $href="/hotels/info/";
             $id=$one['hotelId'];
+            $blockStyle ="hotel_style";
         }
         ?>
+
+    <div class="one_resul_search <? echo $blockStyle; ?>">
       <form action="<?=$href?>" method="get">
         <input type="hidden" name="id" value="<?=$id?>">
-        <div class="main_search">
-           <img src="/images/str.png" alt="" class="floatR marT10R10">
            <span><?=$one[$prop]?></span>
-           <strong>
-            <?if(isset($one['hotelsCount'])):?>
-                <?=$one['hotelsCount']?>   отелей
-            <?else:?>
-               <?=$one['hotelName']?>
-            <?endif?>
-             </strong>
+           <p>
+              <?if(isset($one['hotelsCount'])):?>
+                  <?=$one['hotelsCount']?>   отелей
+              <?else:?>
+                 <?=$one['hotelName']?>
+              <?endif?>
+            </p>
             <input type="submit" value="">
-        </div>
       </form>
+    </div><!-- one_resul_search -->
+
 <?endforeach?>
     <?Yii::app()->session['cityHotelsIds']=$sessionData;  ?>
 <?endif?>

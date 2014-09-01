@@ -204,7 +204,6 @@ header table td:last-child a {
 }
 
 .search_citywnumbers li {
-  padding: 20px 20px 20px 30px;
   background-color: #d8e2e0;
   display: block;
   font-size: 120%;
@@ -215,35 +214,22 @@ header table td:last-child a {
 }
 .search_citywnumbers li a {
   text-decoration: none;
+  padding: 20px 20px 20px 30px;
   color: #000000;
+  display: block;
 }
 .search_citywnumbers li span {
   margin-left: 15px;
+  width: 43px;
+  height: 26px;
+  display: inline-block;
+  text-align: center;
   position: relative;
   color: #fff;
-  background-color: #5299c7;
-  height: 20px;
-  padding: 3px 0;
-  line-height: 1.4;
-}
-.search_citywnumbers li span:after, .search_citywnumbers li span:before {
-  display: inline-block;
-  content: "";
-  width: 8px;
-  height: 20px;
-  padding-bottom: 6px;
-  position: absolute;
-  top: 0;
+  line-height: 1.5;
+  background-image: url(../img/bg/search_citywnumbers_span.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(../img/bg/span-before.png);
-}
-.search_citywnumbers li span:before {
-  left: -8px;
-}
-.search_citywnumbers li span:after {
-  background-image: url(../img/bg/span-after.png);
-  right: -8px;
 }
 
 .home_aftersearch {
@@ -255,8 +241,8 @@ header table td:last-child a {
 }
 .home_aftersearch li {
   list-style-type: none;
-  padding: 0 0 15px 50px;
-  margin: 0 0 15px;
+  padding: 0 0 25px 50px;
+  margin: 0 0 5px;
   background-repeat: no-repeat;
   background-position: left 2px;
   color: #000;
@@ -272,6 +258,61 @@ header table td:last-child a {
 }
 .home_aftersearch li:nth-child(4) {
   background-image: url(../img/bg/home_aftersearch_4.png);
+}
+
+/* protected\views\search\oneResult.php */
+.search_wrapper {
+  background: #ededed;
+  padding: 10px 20px;
+}
+.search_wrapper br {
+  display: none;
+}
+.search_wrapper h2 {
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 20px;
+}
+.search_wrapper .cityName {
+  background-image: url(../img/bg/cityname.png);
+}
+.search_wrapper .regionName {
+  background-image: url();
+}
+.search_wrapper .hotelCity {
+  background-image: url();
+}
+
+.hotel_style .main_search input[type=submit] {
+  display: block;
+  width: 100%;
+  height: 60px;
+  top: 18px;
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.main_search {
+  font-size: 140%;
+  color: #393f43;
+  background: #fff;
+  padding: 15px 5px 15px 25px;
+  position: relative;
+  margin-bottom: 3px;
+}
+.main_search span {
+  font-size: 120%;
+  color: #5299c7 !important;
+}
+.main_search strong {
+  font-size: 90%;
+  color: #8d8d8d !important;
+  display: block;
+  font-weight: 400;
 }
 
 .main_wrapper {
@@ -309,6 +350,8 @@ header table td:last-child a {
 }
 .main_wrapper table td a {
   color: #fff;
+}
+.main_wrapper table td a:hover, .main_wrapper table td a:link, .main_wrapper table td a:visited {
   color: #fff;
 }
 .main_wrapper table tr .active {
@@ -317,6 +360,8 @@ header table td:last-child a {
 }
 .main_wrapper a {
   text-decoration: none;
+}
+.main_wrapper a:hover, .main_wrapper a:link, .main_wrapper a:visited {
   text-decoration: none;
 }
 
@@ -401,7 +446,8 @@ footer ul li a:hover, footer ul li a:link, footer ul li a:active {
   float: right;
 }
 
-.cf5af41 {
+.cf5af41,
+.bgc_orange {
   background: #f5af41;
 }
 
@@ -497,42 +543,6 @@ header ul {
 
 .padR10 {
   padding-right: 10px;
-}
-
-.search_wrapper {
-  background: #ededed;
-  padding: 10px 20px;
-}
-.search_wrapper .main_search input[type=submit] {
-  display: block;
-  width: 100%;
-  height: 60px;
-  top: 18px;
-  position: absolute;
-  left: 0;
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.main_search {
-  font-size: 140%;
-  color: #393f43;
-  background: #fff;
-  padding: 15px 5px 15px 25px;
-  position: relative;
-  margin-bottom: 3px;
-}
-.main_search span {
-  font-size: 120%;
-  color: #5299c7 !important;
-}
-.main_search strong {
-  font-size: 90%;
-  color: #8d8d8d !important;
-  display: block;
-  font-weight: 400;
 }
 
 .city {

@@ -5,7 +5,8 @@
     $layout=$this->getLayoutFile('main');
 ?>
 
-<div class="form_wrapper cf5af41">
+<!-- ready -->
+<div class="form_wrapper bgc_orange">
     <form id="" action="/search" method="get">
         <ul>
             <li>

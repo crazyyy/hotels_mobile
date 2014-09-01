@@ -1,14 +1,14 @@
 
-<div class="form_wrapper cf5af41">
-    <form id="" action="" method="get">
+<div class="form_wrapper bgc_orange">
+    <form id="" action="/search" method="get">
         <ul>
-            <li class="padT10 padB10">
-                <img src="/images/zoom.png" alt="" class="marR10">Найти город или отель:<br>
-                <input type="text" id="" value="<?if($s) echo $s?>" name="s" class="inp" placeholder="" autocomplete="off" spellcheck="false">
+            <li>
+                <label for="scity">Найти город или отель:</span>
+                <input typte="text" id="scity" name="s" placeholder="" value="<?if($s) echo $s?>" autocomplete="off" spellcheck="false" required="required">
             </li>
         </ul>
     </form>
-</div>
+</div><!-- form_wrapper -->
 <div class="main_wrapper">
     <div class="search_wrapper">
         <?if($data&&isset($data['result'][1])):?>
@@ -23,8 +23,8 @@
                 Нет результатов.
         <?else:?>
             <?foreach($data['result'][1] as $key=>$rArray):?>
-                        <?=SearchResultView::render($key,$rArray)?>
+                <?=SearchResultView::render($key,$rArray)?>
             <?endforeach?>
          <?endif;?>
-    </div>
-</div>
+    </div><!-- search_wrapper -->
+</div><!-- main_wrapper -->
