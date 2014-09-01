@@ -276,10 +276,10 @@ header table td:last-child a {
 .search_wrapper .cityName {
   background-image: url(../img/bg/cityname.png);
 }
-.search_wrapper .regionName {
+.search_wrapper .hotelCity {
   background-image: url();
 }
-.search_wrapper .hotelCity {
+.search_wrapper .regionName {
   background-image: url();
 }
 
