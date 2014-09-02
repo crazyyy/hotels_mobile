@@ -1,9 +1,7 @@
-<div class="menu">
-<ul>
-    <li><a href="/"><img src="/images/ico_1.png" alt="" class="marR10 v-aM">Главная</a></li>
-    <li><a href="#"><img src="/images/ico_2.png" alt="" class="marR10 v-aM">Забронировать по телефону</a></li>
-    <li><a href="/hotels/viewed"><img src="/images/ico_3.png" alt="" class="marR10 v-aM">Просмотренные отели</a></li>
-    <li><a href="/hotels/halfprice"><img src="/images/ico_4.png" alt="" class="marR10 v-aM">Отели за полцены</a> <div class="counter">120</div></li>
-    <li><a href="http://hotels24.ua"><img src="/images/ico_5.png" alt="" class="marR10 v-aM">Полная версия сайта</a></li>
-</ul>
-</div>
+<ul class="menu">
+    <li class="menu_href_home"><a href="/">Главная</a></li>
+    <li class="menu_href_phone_order"><a href="#">Забронировать по телефону</a></li>
+    <li class="menu_href_viewed"><a href="/hotels/viewed">Просмотренные отели</a></li>
+    <li class="menu_href_halfprice"><a href="/hotels/halfprice">Отели за полцены</a> <span>120</span></li>
+    <li class="menu_href_norm_site"><a href="http://hotels24.ua">Полная версия сайта</a></li>
+</ul><!-- menu -->

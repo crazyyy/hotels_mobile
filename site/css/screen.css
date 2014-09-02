@@ -1,12 +1,12 @@
 /* -----------------------------------------------------------------------
- Blueprint CSS Framework 1.0.1
- http://blueprintcss.org
-
-   * Copyright (c) 2007-Present. See LICENSE for more info.
-   * See README for instructions on how to use Blueprint.
-   * For credits and origins, see AUTHORS.
-   * This is a compressed file. See the sources in the 'src' directory.
------------------------------------------------------------------------ */
+ * Blueprint CSS Framework 1.0.1
+ * http://blueprintcss.org
+ *
+ *   * Copyright (c) 2007-Present. See LICENSE for more info.
+ *   * See README for instructions on how to use Blueprint.
+ *   * For credits and origins, see AUTHORS.
+ *   * This is a compressed file. See the sources in the 'src' directory.
+ *----------------------------------------------------------------------- */
 /* reset.css */
 html {
   margin: 0;
@@ -48,11 +48,11 @@ table, th, td {
 }
 
 blockquote:before, blockquote:after {
-  content: '';
+  content: "";
 }
 
 q:before, q:after {
-  content: '';
+  content: "";
 }
 
 blockquote, q {
@@ -186,12 +186,12 @@ del {
 pre {
   margin: 1.5em 0;
   white-space: pre;
-  font: 1em 'andale mono', 'lucida console', monospace;
+  font: 1em "andale mono", "lucida console", monospace;
   line-height: 1.5;
 }
 
 code, tt {
-  font: 1em 'andale mono', 'lucida console', monospace;
+  font: 1em "andale mono", "lucida console", monospace;
   line-height: 1.5;
 }
 
@@ -249,7 +249,7 @@ caption {
 }
 
 .small {
-  font-size: .8em;
+  font-size: 0.8em;
   margin-bottom: 1.875em;
   line-height: 1.875em;
 }
@@ -950,7 +950,7 @@ hr.space {
 }
 
 .clearfix:after, .container:after {
-  content: "\0020";
+  content: " ";
   display: block;
   height: 0;
   clear: both;
@@ -965,3 +965,5 @@ hr.space {
 .clear {
   clear: both;
 }
+
+/*# sourceMappingURL=screen.css.map */

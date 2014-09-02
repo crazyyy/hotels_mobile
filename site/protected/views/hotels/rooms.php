@@ -1,6 +1,7 @@
+<!-- not ready -->
 <div class="main_wrapper">
     <? $this->renderPartial('../common/headerHotel', array('hotel' => $hotel, 'slider' => $slider)) ?>
-    <div class="hotel_list">
+    <div class="hotel_list rooms_list">
         <? foreach ($rooms as $room) : ?>
             <div class="room_info">
                 <div class="floatL">
@@ -58,7 +59,7 @@
                 <? endif; ?>
             </div>
         <? endforeach; ?>
-    </div>
+    </div><!-- rooms_list -->
 </div>
 
 

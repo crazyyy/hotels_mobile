@@ -1,4 +1,4 @@
-
+<!-- ready -->
 <div class="form_wrapper bgc_orange">
     <form id="" action="/search" method="get">
         <ul>

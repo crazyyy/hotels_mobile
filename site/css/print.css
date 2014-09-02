@@ -1,12 +1,12 @@
 /* -----------------------------------------------------------------------
- Blueprint CSS Framework 1.0.1
- http://blueprintcss.org
-
-   * Copyright (c) 2007-Present. See LICENSE for more info.
-   * See README for instructions on how to use Blueprint.
-   * For credits and origins, see AUTHORS.
-   * This is a compressed file. See the sources in the 'src' directory.
------------------------------------------------------------------------ */
+ * Blueprint CSS Framework 1.0.1
+ * http://blueprintcss.org
+ *
+ *   * Copyright (c) 2007-Present. See LICENSE for more info.
+ *   * See README for instructions on how to use Blueprint.
+ *   * For credits and origins, see AUTHORS.
+ *   * This is a compressed file. See the sources in the 'src' directory.
+ *----------------------------------------------------------------------- */
 /* print.css */
 body {
   line-height: 1.5;
@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 code {
-  font: .9em "Courier New", Monaco, Courier, monospace;
+  font: 0.9em "Courier New", Monaco, Courier, monospace;
 }
 
 a img {
@@ -55,11 +55,11 @@ blockquote {
   margin: 1.5em;
   padding: 1em;
   font-style: italic;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .small {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .large {
@@ -83,3 +83,5 @@ a:link:after, a:visited:after {
   content: " (" attr(href) ")";
   font-size: 90%;
 }
+
+/*# sourceMappingURL=print.css.map */

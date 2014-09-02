@@ -3,13 +3,13 @@
 $rank = number_format($hotel['ranking'] / $hotel['rating'] * 10, 1);
 $rankIndex = ceil($rank / 2);
 ?>
-    <div class="posR">
-        <img src="<?= CHtml::encode($slider['image']) ?>" alt="" class="v-aM" style="width: 100%; height: 100%;">
+    <div class="posR header_hotel">
+        <img src="<?= CHtml::encode($slider['image']) ?>" alt="<?= $hotel['name'] ?>" title="<?= $hotel['name'] ?>" class="v-aM header_hotel_img">
 
         <div class="hotel_info_page_top">
-            <div class="star_wrap">
+            <div class="star_wrap clearfix">
                 <? for ($i = 0; $i < $rankIndex; $i++) { ?>
-                    <img src="/images/ico_star_big.png" alt="" class="star">
+                    <span></span>
                 <? } ?>
             </div>
             <div class="floatR bal">Потрясающе,
@@ -31,14 +31,11 @@ $rankIndex = ceil($rank / 2);
                 <div class="icon_right"></div>
             </a>
         <? endif; ?>
-    </div>
+    </div><!-- header_hotel -->
 
     <div class="city_wrapper">
-        <a href="#">
-            <div class="date">Изменить дату</div>
-        </a>
-
+        <a href="#" class="date">Изменить дату</a>
         <div class="numb"><?= $hotel['address'] ?></div>
         <? $this->renderPartial('../common/fromTo', array()) ?>
-    </div>
+    </div><!-- city_wrapper -->
 <? $this->renderPartial('../common/menuHotel', array('hotel' => $hotel)) ?>

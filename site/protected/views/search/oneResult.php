@@ -1,3 +1,4 @@
+<!-- ready -->
 <?if($data):?>
   <h2 class="<?=$prop?>"><?=$label?></h2>
   <?$sessionData=Yii::app()->session['cityHotelsIds']?>

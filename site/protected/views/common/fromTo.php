@@ -1,3 +1,4 @@
+<!-- ready -->
 <?
     //    $app
     //Yii::app()->controller->monthes
@@ -15,6 +16,6 @@
     $day2=intval($date2->format('d'));
     $month2=Yii::app()->controller->monthes[intval($date2->format('m'))];
 ?>
-<div class="floatL">
-    <img class="padR10" alt="Call" src="/images/icon_calendar.png" style="float: left;"><strong><?=$nightCount?>  (<?=$day1." ".$month1." - ".$day2." ".$month2?>)</strong>
+<div class="floatL from_to">
+  <span><?=$nightCount?>  (<?=$day1." ".$month1." - ".$day2." ".$month2?>)</span>
 </div>

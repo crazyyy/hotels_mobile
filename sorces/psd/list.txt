@@ -1,0 +1,29 @@
+1 home.psd							Готово
+	http://rock-hotel.org/opera_mini/site/
+2 search-in.psd						Готово
+	http://rock-hotel.org/opera_mini/site/search?s=%D0%92%D0%B8%D0%BD%D0%BD%D0%B8%D1%86%D0%B0&day_arr=02&month_year_arr=2014-09&day_dep=31&month_year_dep=2014-09
+3 main-menu.psd						Готово
+	http://rock-hotel.org/opera_mini/site/site/menu
+4 city-result.psd					Неготово - немає рейтингу, зірочки знижки. Широкі назви роблять горизонтальну полосу прокрутки
+4.1 city-result-menu.psd			Неготово - незрозумілий функціонал.
+5 hotel-main nums.psd				Неготово - hotels\rooms не виведено в пхп
+5.1 hotel-main num choise.psd		Неготово - не виведений список номерів отеля
+6 filter.psd						Неготово - незрозумілий функціонал
+7 hotel about.psd					Готово
+	http://rock-hotel.org/opera_mini/site/hotels/info/?id=4264
+7.1 hotel about map.psd				Готово
+	http://rock-hotel.org/opera_mini/site/hotels/map/?id=4264
+8 hotel about reviews.psd			Готово
+	http://rock-hotel.org/opera_mini/site/hotels/reviews/?id=381
+9 order form.psd
+9.1 order form 2.psd
+9.2 order form 3.psd
+9.3 order form 4.psd
+10 ordr form last.psd				
+11 contacts phone.psd				Готово
+	http://rock-hotel.org/opera_mini/site/site/contacts
+12 hotel info.psd
+
+
+а. на багатьох сторінках меню нема можливості повернутись на попередню сторінку
+б. 404 помилка нема дизайну

@@ -19,11 +19,11 @@
     <table>
       <tr>
         <td>         
-          <button type="button" class="menu_header collapsed" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+          <a href="/site/menu"><button type="button" class="menu_header collapsed" data-toggle="collapse" data-target=".navbar-ex2-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
+          </button></a>
        </td>
 
         <td>
