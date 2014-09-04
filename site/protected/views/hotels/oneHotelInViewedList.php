@@ -1,4 +1,4 @@
-
+<!-- not ready - what page? -->
 <? if($dataHotelInfo!=null and count($dataHotelInfo)) { ?>
     <div class="hotel_info">
         <a href="/hotels/info/?id=<?=$dataHotelInfo['hotel_id']?>">
@@ -9,9 +9,9 @@
         <div class="floatR bal">Потрясающе,
             <div class="ocenka"><?=$dataHotelInfo['review']?></div>
         </div>
-        <div class="star">
+        <div class="rating clearfix">
             <? for($index=1; $index<=$dataHotelInfo['class']; $index++) { ?>
-                <img src="/images/icon_star.png" alt="hotel" class="v-aM dispIB">
+                <span></span>
             <? } ?>
         </div>
         <div class="name">

@@ -719,6 +719,40 @@ header table td:last-child a {
   color: #a6a6a6;
 }
 
+.skidka_wrapper {
+  color: #58585a;
+  padding: 10px 10px 0 10px;
+  overflow: auto;
+  border-top: 1px solid #cbcecf;
+  text-align: center;
+}
+.skidka_wrapper h2 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 120%;
+  font-weight: normal;
+}
+.skidka_wrapper select {
+  width: 90%;
+  height: 30px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.rating {
+  position: absolute;
+  left: 107px;
+  top: 3px;
+}
+.rating span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin: 0 5px 0 0;
+  background-image: url(../img/bg/star.png);
+}
+
 .main_search {
   font-size: 140%;
   color: #393f43;
@@ -970,13 +1004,6 @@ header ul {
 
 .marL19p {
   margin-left: 19%;
-}
-
-.skidka_wrapper {
-  color: #58585a;
-  padding: 10px 10px 0 10px;
-  overflow: auto;
-  border-top: 1px solid #cbcecf;
 }
 
 .room_info {

@@ -1,3 +1,4 @@
+<!-- ready -->
 <ul class="menu">
     <li class="menu_href_home"><a href="/">Главная</a></li>
     <li class="menu_href_phone_order"><a href="#">Забронировать по телефону</a></li>
