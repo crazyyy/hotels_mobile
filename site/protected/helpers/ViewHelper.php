@@ -135,4 +135,14 @@ class ViewHelper {
         }
         return $format;
     }
+
+    /**
+     * Example: 2 Июня 2014
+     *
+     * @param $date
+     */
+    public static function dateFull($date)
+    {
+        return Yii::app()->dateFormatter->format('d MMMM y', $date);
+    }
 } 

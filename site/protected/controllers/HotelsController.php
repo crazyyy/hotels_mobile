@@ -17,14 +17,8 @@ class HotelsController extends Controller
 
         $hotel = & $res['data'][$hotelId];
 
-        $reviews = Service::getReviewBest($hotelId);
-
-        $commentsCount = 0;
-        if (isset($reviews[$hotelId])) {
-            $commentsCount = $reviews[$hotelId]['count'];
-        }
-
-        $hotel['commentsCount'] = $commentsCount;
+        $reviews = Service::getReviews($hotelId);
+        $hotel['commentsCount'] = count($reviews);
 
         return $hotel;
     }
@@ -98,8 +92,6 @@ class HotelsController extends Controller
         $session = Yii::app()->session;
 
         $roomsApi = Service::getBlockAvailability($hotel['hotel_id'], null, null, $session['arrival_date'], $session['departure_date']);
-
-        $blocksById = array();
 
         if ($roomsApi['data']) {
             $rooms = array();
@@ -207,18 +199,28 @@ class HotelsController extends Controller
     {
         $hotel = $this->getHotelOr404(Yii::app()->request->getParam('id'));
 
-        $reviews = Service::getReviews($hotel['hotel_id']);
+        $reviews = array_reverse(Service::getReviews($hotel['hotel_id']));
 
-        $page = max(1, intval(Yii::app()->request->getParam('page')));
-        $limit = 5;
-        $offset = ($page - 1) * $limit;
-        $reviews = array_slice($reviews, $offset, $limit);
+        $pagination = new CPagination(count($reviews));
+        $pagination->setPageSize(5);
+        $pagination->setCurrentPage(Yii::app()->request->getParam('page', 1) - 1);
+
+        $reviews = array_slice($reviews, $pagination->getOffset(), $pagination->getLimit());
+
+        foreach ($reviews as &$review) {
+            $totalRating = 0;
+            foreach ($review['grades'] as $grade) {
+                $totalRating += $grade['value'];
+            }
+
+            $review['rating'] = number_format($totalRating / (count($review['grades']) ? : 1), 1);
+        }
 
         $this->render('reviews', array(
-            'hotel'   => $hotel,
-            'reviews' => $reviews,
-            'page'    => $page,
-            'slider'  => $this->getSlider($hotel['hotel_id']),
+            'hotel'      => $hotel,
+            'reviews'    => $reviews,
+            'pagination' => $pagination,
+            'slider'     => $this->getSlider($hotel['hotel_id']),
         ));
     }
 

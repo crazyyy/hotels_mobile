@@ -10,30 +10,53 @@ class Filters {
 
     public static  $hotelsTypeAr = array(
         1 => array(
-            'id' => 2,
+            'included' => array(2),
+            'excluded' => array(),
             'name' => 'Апартаменты',
         ),
         2 => array(
-            'id' => 1,
+            'included' => array(1),
+            'excluded' => array(),
             'name' => 'Отель',
         ),
         3 => array(
-            'id' => 13,
+            'included' => array(13),
+            'excluded' => array(),
             'name' => 'Хостел'
         ),
         4 => array(
-            'id' => 34,
+            'included' => array(34),
+            'excluded' => array(),
             'name' => 'Мини отель',
         ),
-        5 => null,
+        5 => array(
+            'included' => array(),
+            'excluded' => array(2,1,13,34),
+            'name' => 'Другие',
+        ),
     );
 
     public static $maxPricesAr = array(
-        1 => 100,
-        2 => 300,
-        3 => 600,
-        4 => 1000,
-        5 => null,
+        1 => array(
+            'min' => 0,
+            'max' => 100,
+        ),
+        2 => array(
+            'min' => 100,
+            'max' => 300,
+        ),
+        3 => array(
+            'min' => 300,
+            'max' => 600,
+        ),
+        4 => array(
+            'min' => 600,
+            'max' => 1000,
+        ),
+        5 => array(
+            'min' => 1000,
+            'max' => null,
+        ),
     );
 
     public static $facilitiesAr = array(
@@ -46,14 +69,6 @@ class Filters {
 
     public static function getFilteringHotels($prices, $hotel_types, $facilities, $classes)
     {
-        $hoteltype_ids = array();
-        foreach ($hotel_types as $hotel_type) {
-            if(self::$hotelsTypeAr[$hotel_type])
-            {
-                $hoteltype_ids[] = self::$hotelsTypeAr[$hotel_type]['id'];
-            }
-        }
-
         $city_id = 18058; // Одесса
         $data = Service::getHotelInfo(null, $city_id, null, null, $order_mode=null);
         $data = $data['data'];
@@ -63,6 +78,15 @@ class Filters {
         if($classes)
         {
             $hotels = self::filterByClasses($hotels, $classes);
+        }
+
+        if($hotel_types)
+        {
+            $hotel_types1 = array();
+            foreach ($hotel_types as $hotel_type) {
+                $hotel_types1[] = self::$hotelsTypeAr[$hotel_type];
+            }
+            $hotels = self::filterByHotelTypes($hotels, $hotel_types1);
         }
 
         if($facilities)
@@ -76,12 +100,11 @@ class Filters {
 
         if($prices)
         {
-            $count = count($prices);
-            $maxPrice = self::$maxPricesAr[$prices[$count-1]];
-            if($maxPrice)
-            {
-                $hotels = self::filterByPrice($hotels, $maxPrice);
+            $prices1 = array();
+            foreach ($prices as $price) {
+                $prices1[] = self::$maxPricesAr[$price];
             }
+            $hotels = self::filterByPrice($hotels, $prices1);
         }
 
         return $hotels;
@@ -109,7 +132,7 @@ class Filters {
         return $data;
     }
 
-    public static function filterByPrice($data, $maxPrice)
+    public static function filterByPrice($data, $prices)
     {
         $hotelIds = array();
         foreach ($data as $hotel) {
@@ -121,13 +144,26 @@ class Filters {
         $dataBlockAvailabilityResponse=Service::getBlockAvailability($hotelIds,null,null,$arrival_date,$departure_date);
         $dataBlockAvailability = $dataBlockAvailabilityResponse['data'];
 
+//        Якщо вільних номерів немає, то отель не попаде в $dataBlockAvailability
+//        тоді ціну не отримати (=
+
         $data1 = array();
         foreach ($data as $id => $hotel) {
             foreach ($dataBlockAvailability as $element) {
                 if($element['hotel_id']==$hotel['hotel_id'])
                 {
                     $minPrice = OneHotelView::getMinFilterPrice($element['block']);
-                    if($minPrice<=$maxPrice)
+                    $hit=0;
+                    foreach ($prices as $price) {
+                        if($price['min']<=$minPrice)
+                        {
+                            if($price['max']===null or $minPrice<=$price['max'])
+                            {
+                                $hit=1;
+                            }
+                        }
+                    }
+                    if($hit==1)
                     {
                         $data1[$id] = $hotel;
                     }
@@ -167,13 +203,63 @@ class Filters {
         $data1 = array();
         foreach ($data as $id => $hotel) {
             foreach ($classes as $class) {
-                if($hotel['class'] = $class)
+                if($hotel['class'] == $class)
                 {
                     $data1[$id] = $hotel;
                     break;
                 }
             }
         }
+        return $data1;
+    }
+
+    public static  function filterByHotelTypes($data, $types)
+    {
+        $data1 = array();
+        $included = array();
+        $excluded = array();
+        foreach ($types as $type) {
+            $included = array_merge($included, $type['included']);
+            $excluded = array_merge($excluded, $type['excluded']);
+        }
+
+        $excluded1 = array();
+        foreach ($excluded as $excl) {
+            $hit = 0;
+            foreach ($included as $incl) {
+                if($excl==$incl)
+                {
+                    $hit = 1;
+                    break;
+                }
+            }
+            if($hit == 0)
+            {
+                $excluded1[] = $excl;
+            }
+        }
+
+        foreach ($data as $id => $hotel) {
+            if(count($excluded1))
+            {
+                foreach ($excluded1 as $excl) {
+                    if($hotel['hoteltype_id'] != $excl)
+                    {
+                        $data1[$id] = $hotel;
+                        break;
+                    }
+                }
+            } else {
+                foreach ($included as $incl) {
+                    if($hotel['hoteltype_id'] == $incl)
+                    {
+                        $data1[$id] = $hotel;
+                        break;
+                    }
+                }
+            }
+        }
+
         return $data1;
     }
 
