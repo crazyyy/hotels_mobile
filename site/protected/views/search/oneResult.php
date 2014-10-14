@@ -3,8 +3,8 @@
   <h2 class="<?=$prop?>"><?=$label?></h2>
   <?$sessionData=Yii::app()->session['cityHotelsIds']?>
   <?foreach($data as $one):?>
-    <?$href='';
-      $id='';
+        <?$href='';
+        $id='';
         if(isset($one['cityId'])){
             $href="/hotels/byCity";
             $id=$one['cityId'];
@@ -24,21 +24,24 @@
         }
         ?>
 
-    <div class="one_resul_search <? echo $blockStyle; ?>">
-      <form action="<?=$href?>" method="get">
-        <input type="hidden" name="id" value="<?=$id?>">
-           <span><?=$one[$prop]?></span>
-           <p>
-              <?if(isset($one['hotelsCount'])):?>
-                  <?=$one['hotelsCount']?>   отелей
-              <?else:?>
-                 <?=$one['hotelName']?>
-              <?endif?>
-            </p>
-            <input type="submit" value="">
-      </form>
-    </div><!-- one_resul_search -->
+        <div class="one_resul_search <? echo $blockStyle; ?>">
+            <form action="<?=$href?>" method="get">
+                <?foreach($parameters as $name => $parameter){?>
+                    <input type="hidden" name="<?=$name?>" value="<?=$parameter?>">
+                <?}?>
+                <input type="hidden" name="id" value="<?=$id?>">
+                <span><?=$one[$prop]?></span>
+                <p>
+                    <?if(isset($one['hotelsCount'])):?>
+                        <?=$one['hotelsCount']?>   отелей
+                    <?else:?>
+                        <?=$one['hotelName']?>
+                    <?endif?>
+                </p>
+                <input type="submit" value="">
+            </form>
+        </div><!-- one_resul_search -->
 
-<?endforeach?>
+    <?endforeach?>
     <?Yii::app()->session['cityHotelsIds']=$sessionData;  ?>
 <?endif?>

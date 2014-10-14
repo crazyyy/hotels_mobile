@@ -10,8 +10,8 @@
     <form id="" action="/search" method="get">
         <ul>
             <li>
-                <label for="scity">Найти город или отель:</span>
-                <input typte="text" id="scity" name="s" placeholder="" autocomplete="off" spellcheck="false" required="required">
+                <label for="scity">Найти город или отель:</label>
+                <input typte="text" id="scity" name="s" placeholder="" value="<? if($s)echo $s; ?>" autocomplete="off" spellcheck="false" required="required">
             </li>
             <li class="empty_hotel dispNone">
                 <span>В этом отеле нет ни одного свободного номера на выбранные даты</span>
@@ -25,11 +25,11 @@
                     </select>
                     <select name="month_year_arr">
                         <?for ($i=$monthNumber;$i<$monthNumber+12;$i++){?>
-                        <?$yearCurrent=$year?>
-                        <?$index=$i%12?>
-                        <?if($index==0) $index=12?>
-                        <option value="<?=$yearCurrent?>-<?if ($index<10) echo '0'?><?=$index?>"><?=Yii::app()->controller->monthes[$index]?> <?=$yearCurrent?></option>
-                        <?if($index==12) $yearCurrent++?>
+                            <?$yearCurrent=$year?>
+                            <?$index=$i%12?>
+                            <?if($index==0) $index=12?>
+                            <option value="<?=$yearCurrent?>-<?if ($index<10) echo '0'?><?=$index?>"><?=Yii::app()->controller->monthes[$index]?> <?=$yearCurrent?></option>
+                            <?if($index==12) $yearCurrent++?>
                         <?}?>
                     </select>
             </li><!-- search_arrive -->
@@ -42,10 +42,11 @@
                 </select>
                 <select name="month_year_dep">
                     <?for ($i=$monthNumber;$i<$monthNumber+12;$i++){?>
-                    <?$index=$i%12?>
-                    <?if($index==0) $index=12?>
-                    <option value="<?=$year?>-<?if ($index<10) echo '0'?><?=$index?>"><?=Yii::app()->controller->monthes[$index]?> <?=$year?></option>
-                    <?if($index==12) $year++?>
+                        <?$yearCurrent=$year?>
+                        <?$index=$i%12?>
+                        <?if($index==0) $index=12?>
+                        <option value="<?=$yearCurrent?>-<?if ($index<10) echo '0'?><?=$index?>"><?=Yii::app()->controller->monthes[$index]?> <?=$yearCurrent?></option>
+                        <?if($index==12) $yearCurrent++?>
                     <?}?>
                 </select>
             </li><!-- search_dep -->
@@ -58,15 +59,15 @@
 <ul class="search_citywnumbers">
     <?foreach($data[0]['data'] as $city):?>
     <li>
-        <a href="/search?s=<?=$city['name']?>">
+        <a href="/search?s=<?=$city['name']?>&day_arr=<?if (date('d')<10) echo '0';echo date('d')?>&month_year_arr=<?=$year?>-<?if ($monthNumber<10) echo '0'?><?=$monthNumber?>&day_dep=31&month_year_dep=<?=$year?>-<?if ($monthNumber<10) echo '0'?><?=$monthNumber?>&is_href=1">
             <?=$city['name']?><span><?=$city['nr_hotels']?></span>
         </a>
     </li>
     <?endforeach;?>
     <?foreach($data[1]['data'] as $region):?>  
     <li>
-        <a href="/search?s=<?=$region['name']?>">
-            <?=$city['name']?><span><?=$city['nr_hotels']?></span>
+        <a href="/search?s=<?=$region['name']?>&day_arr=<?if (date('d')<10) echo '0';echo date('d')?>&month_year_arr=<?=$year?>-<?if ($monthNumber<10) echo '0'?><?=$monthNumber?>&day_dep=31&month_year_dep=<?=$year?>-<?if ($monthNumber<10) echo '0'?><?=$monthNumber?>&is_href=1">
+            <?=$region['name']?><span><?=$region['count']?></span>
         </a>
     </li>
     <?endforeach;?>

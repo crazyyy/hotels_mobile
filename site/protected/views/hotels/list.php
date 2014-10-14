@@ -5,7 +5,7 @@
 <div class="main_wrapper hotels_list">
     <?if(isset($label)&&isset($data)&&isset($data['data'])&&isset($dataPagination)){?>
     <div class="city_wrapper clearfix">
-        <a href="#" class="date">Изменить даты</a>
+        <a href="/?s=<?=$label?>" class="date">Изменить даты</a>
         <h2><?=$label?></h2>
         <span class="numb"><?=count($data['data'])?> отелей</span>
         <?$this->renderPartial('../common/fromTo',array())?>
@@ -21,14 +21,18 @@
         <tr>
             <td>
                 <? if($page>0){ ?>
-                    <a href="/hotels/byCity?id=<?=$cityId?>&page=<? echo $page-1; ?>">Предыдущая</a>
+                    <a href="<?='http://'.ViewHelper::getPaginationUrl().'&'.'page='.($page-1);?>">
+                        Предыдущая
+                    </a>
                 <? } ?>
             </td>
             <td>
                 <? $maxLimit = ceil(count($data['data'])/$limit)-1;
                     if($page < $maxLimit) { ?>
-                    <a href="/hotels/byCity?id=<?=$cityId?>&page=<? echo $page+1; ?>">Следующая</a>
-               <? } ?>
+                        <a href="<?='http://'.ViewHelper::getPaginationUrl().'&'.'page='.($page+1);?>">
+                            Следующая
+                        </a>
+                    <? } ?>
            </td>
         </tr>
     </table><!-- paginator -->

@@ -15,14 +15,16 @@ class OneHotelView
 
         $dataHotelInfo['hotel_photo'] = self::listImageSrc($dataHotelInfo);
 
-        $dataBlocks = $oneHotel['block'];
-        $dataHotelInfo['min_price'] = self::getMinPrice($dataBlocks);
+//        $dataHotelInfo['min_price'] = self::getMinPrice($oneHotel['block']);
+        $dataHotelInfo['min_price'] = $oneHotel['minPrice'];
 
-        $reviewBest = Service::getReviewBest($hotel_id);
-        if(count($reviewBest))
-        {
-            $dataHotelInfo['review'] = round($reviewBest[$hotel_id]['rating'],1);
-        }
+//        $reviewBest = Service::getReviewBest($hotel_id);
+//        if(count($reviewBest))
+//        {
+//            $dataHotelInfo['review'] = round($reviewBest[$hotel_id]['rating'],1);
+//        }
+        if(isset($oneHotel['review']))
+            $dataHotelInfo['review'] = $oneHotel['review'];
 
         Yii::app()->getController()->renderPartial('oneHotelInList',array(
                 'data'=>$oneHotel,

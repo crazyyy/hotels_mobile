@@ -145,4 +145,12 @@ class ViewHelper {
     {
         return Yii::app()->dateFormatter->format('d MMMM y', $date);
     }
+
+    public static function getPaginationUrl()
+    {
+        $host = @$_SERVER['HTTP_HOST'];
+        $requestUrl = $_SERVER['REQUEST_URI'];
+        $url = preg_replace('/(.*)&page=([0-9][^&]*)(.*)/is',"\${1}\${3}", $requestUrl );
+        return $host.$url;
+    }
 } 

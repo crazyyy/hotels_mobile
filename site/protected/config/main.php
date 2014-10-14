@@ -104,9 +104,9 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
         'api'=>array(
-                'server1'=>'http://api.hotels24.test/',
-                'server2'=>'http://hotels24.test/',
-                'production'=>'http://api.hotels24.ua/',
+                'server1'=>'http:api.test.hotels24.ua/',
+                'server2'=>'http://hotels24.ua/',
+                'production'=>'http://api.test.hotels24.ua/',
                 'productionAjax'=>'http://hotels24.ua/',
                 'urlBlockAvalability'=>'legacy/getBlockAvailability',
                 'urlHotelInfo'=>'hotel/hotel-info/',

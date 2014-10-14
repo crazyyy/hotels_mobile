@@ -3,7 +3,7 @@
     <form id="" action="/search" method="get">
         <ul>
             <li>
-                <label for="scity">Найти город или отель:</span>
+                <label for="scity">Найти город или отель:</label>
                 <input typte="text" id="scity" name="s" placeholder="" value="<?if($s) echo $s?>" autocomplete="off" spellcheck="false" required="required">
             </li>
         </ul>
@@ -23,7 +23,7 @@
                 Нет результатов.
         <?else:?>
             <?foreach($data['result'][1] as $key=>$rArray):?>
-                <?=SearchResultView::render($key,$rArray)?>
+                <?=SearchResultView::render($key,$rArray,$parameters)?>
             <?endforeach?>
          <?endif;?>
     </div><!-- search_wrapper -->

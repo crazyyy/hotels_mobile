@@ -9,11 +9,11 @@
  *----------------------------------------------------------------------- */
 /* print.css */
 body {
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 10pt;
   line-height: 1.5;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   color: #000;
   background: none;
-  font-size: 10pt;
 }
 
 .container {
@@ -21,26 +21,31 @@ body {
 }
 
 hr {
-  background: #ccc;
-  color: #ccc;
   width: 100%;
   height: 2px;
   margin: 2em 0;
   padding: 0;
+  color: #ccc;
   border: none;
+  background: #ccc;
 }
 hr.space {
-  background: #fff;
-  color: #fff;
   visibility: hidden;
+  color: #fff;
+  background: #fff;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
 }
 
 code {
-  font: 0.9em "Courier New", Monaco, Courier, monospace;
+  font: .9em 'Courier New', Monaco, Courier, monospace;
 }
 
 a img {
@@ -52,14 +57,14 @@ p img.top {
 }
 
 blockquote {
+  font-size: .9em;
+  font-style: italic;
   margin: 1.5em;
   padding: 1em;
-  font-style: italic;
-  font-size: 0.9em;
 }
 
 .small {
-  font-size: 0.9em;
+  font-size: .9em;
 }
 
 .large {
@@ -75,13 +80,13 @@ blockquote {
 }
 
 a:link, a:visited {
-  background: transparent;
   font-weight: 700;
   text-decoration: underline;
+  background: transparent;
 }
 a:link:after, a:visited:after {
-  content: " (" attr(href) ")";
   font-size: 90%;
+  content: " (" attr(href) ")";
 }
 
 /*# sourceMappingURL=print.css.map */

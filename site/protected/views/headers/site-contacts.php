@@ -4,7 +4,7 @@
      <a class="contacts_back" href="<?=$referer?>"></a>
    </td>
     <td>
-      <a href="#"></a>
+      <a href="/"></a>
     </td>
     <td>
       <a href="/site/contacts"></a>

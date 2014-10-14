@@ -9,7 +9,7 @@ class BookingController extends Controller
 	{
         if(!isset($_GET['id']) or !isset($_GET['block']))
         {
-            die('missed require params!');
+            throw new CHttpException(404);
         }
 
         $hotels_id = $_GET['id'];
@@ -31,8 +31,20 @@ class BookingController extends Controller
 
         $this->header=$this->renderPartial('/headers/booking-index',array(),true);
         $this->layout='/layouts/main-bez-footer';
+
+        $booking = new BookingForm();
+
+        if (isset($_POST['BookingForm'])) {
+            $booking->setAttributes($_POST['BookingForm']);
+            if ($booking->validate()) {
+                $response = Service::booking(1);
+                $this->redirect($this->createUrl('booking/card'));
+            }
+        }
+
         $this->render('index', array(
             'block' => $block,
+            'booking' => $booking,
             'dataHotelInfo' => $dataHotelInfo,
         ));
 	}

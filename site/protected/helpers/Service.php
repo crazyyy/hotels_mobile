@@ -59,6 +59,9 @@ class Service
             if (false === $data) {
                 $data = json_decode($curl->get($host . $url, $params), true);
                 Yii::app()->cache->set($key, $data, $options['cache']);
+            } elseif(isset($data['data']) and $data['data']===null){
+                $data = json_decode($curl->get($host . $url, $params), true);
+                Yii::app()->cache->set($key, $data, $options['cache']);
             }
         } else {
             $data = json_decode($curl->get($host . $url, $params), true);
@@ -122,8 +125,9 @@ class Service
             $params['stars']=$stars;
 
         $data=self::request(Yii::app()->params->api['production'],Yii::app()->params->api['urlBlockAvalability'],$params, array(
-            'cache' => 300,
-        ));
+                'cache' => 300,
+//                'useApiKey' => true
+            ));
         return $data;
     }
 
@@ -251,6 +255,40 @@ class Service
         ));
 
         return $response['data'];
+    }
+
+
+    public static function booking($data)
+    {
+        $data = array(
+            'arrivalDate'   => (new \DateTime())->format('Y-m-d'),
+            'departureDate' => (new \DateTime("+1 days"))->format('Y-m-d'),
+            'blocks'        => array(
+                array(
+                    'id'         => 1,
+                    'tariff'     => '5425476b6b06784d498b4567',
+                    'totalCost'  => 400,
+                    'living'     => [],
+                    'conditions' => array(
+                        'cancellation'  => 1001,
+                        'bookingMethod' => 3
+                    ),
+                )
+            ),
+            'requisites'    => array(
+                'fistName' => 'TestFirstName',
+                'lastName' => 'TestLastName',
+                'email'    => 'test.email@hotels24.ua',
+                'phone'    => '+3805555555'
+            ),
+            'nextState' => 'preRequisites',
+        );
+
+        $response = Yii::app()->curl->post('http://api.test.hotels24.ua/test/fast-booking', array(
+            'request' => json_encode($data)
+        ));
+        $data = json_decode($response, true);
+        return $data;
     }
 
 

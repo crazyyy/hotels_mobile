@@ -67,13 +67,21 @@ class Filters {
         5 => 'Спортивные развлечения',
     );
 
-    public static function getFilteringHotels($prices, $hotel_types, $facilities, $classes)
+    public static function getFilteringHotels($dataAvailability, $filters)
     {
-        $city_id = 18058; // Одесса
-        $data = Service::getHotelInfo(null, $city_id, null, null, $order_mode=null);
-        $data = $data['data'];
+        $hotelsIds = array();
+        foreach ($dataAvailability['data'] as $hotel) {
+            $hotelsIds[] = $hotel['hotel_id'];
+        }
 
-        $hotels = $data;
+//        $city_id = 18058; // Одесса
+        $data = Service::getHotelInfo($hotelsIds, null, null, null, $order_mode=null);
+        $hotels = $data['data'];
+
+        $prices = isset($filters['price'])?$filters['price']:null;
+        $hotel_types = isset($filters['hotel_type'])?$filters['hotel_type']:null;
+        $facilities = isset($filters['facility'])?$filters['facility']:null;
+        $classes = isset($filters['class'])?$filters['class']:null;
 
         if($classes)
         {
@@ -98,16 +106,27 @@ class Filters {
             $hotels = self::filterByFacilities($hotels, $facilities1);
         }
 
+        $dataAvailability1 = array();
+        foreach ($hotels as $hotel) {
+            foreach ($dataAvailability['data'] as $element) {
+                if($element['hotel_id'] == $hotel['hotel_id'])
+                {
+                    $dataAvailability1[] = $element;
+                }
+            }
+        }
+
         if($prices)
         {
             $prices1 = array();
             foreach ($prices as $price) {
                 $prices1[] = self::$maxPricesAr[$price];
             }
-            $hotels = self::filterByPrice($hotels, $prices1);
+            $dataAvailability1 = self::filterByPrice($dataAvailability1, $prices1);
         }
 
-        return $hotels;
+//        $dataAvailability['data'] = $dataAvailability1;
+        return $dataAvailability1;
     }
 
     public static function sortByPrice($data)
@@ -134,38 +153,51 @@ class Filters {
 
     public static function filterByPrice($data, $prices)
     {
-        $hotelIds = array();
-        foreach ($data as $hotel) {
-            $hotelIds[] = $hotel['hotel_id'];
-        }
-
-        $arrival_date=Yii::app()->session['arrival_date'];
-        $departure_date=Yii::app()->session['departure_date'];
-        $dataBlockAvailabilityResponse=Service::getBlockAvailability($hotelIds,null,null,$arrival_date,$departure_date);
-        $dataBlockAvailability = $dataBlockAvailabilityResponse['data'];
-
-//        Якщо вільних номерів немає, то отель не попаде в $dataBlockAvailability
-//        тоді ціну не отримати (=
+//        $hotelIds = array();
+//        foreach ($data as $hotel) {
+//            $hotelIds[] = $hotel['hotel_id'];
+//        }
+//
+//        $arrival_date=Yii::app()->session['arrival_date'];
+//        $departure_date=Yii::app()->session['departure_date'];
+//        $dataBlockAvailabilityResponse=Service::getBlockAvailability($hotelIds,null,null,$arrival_date,$departure_date);
+//        $dataBlockAvailability = $dataBlockAvailabilityResponse['data'];
+//
+////        Якщо вільних номерів немає, то отель не попаде в $dataBlockAvailability
+////        тоді ціну не отримати (=
+//
+//        $data1 = array();
+//        foreach ($data as $id => $hotel) {
+//            foreach ($dataBlockAvailability as $element) {
+//                if($element['hotel_id']==$hotel['hotel_id'])
+//                {
+//                    $minPrice = OneHotelView::getMinFilterPrice($element['block']);
+//                    $hit=0;
+//                    foreach ($prices as $price) {
+//                        if($price['min']<=$minPrice)
+//                        {
+//                            if($price['max']===null or $minPrice<=$price['max'])
+//                            {
+//                                $hit=1;
+//                            }
+//                        }
+//                    }
+//                    if($hit==1)
+//                    {
+//                        $data1[$id] = $hotel;
+//                    }
+//                }
+//            }
+//        }
 
         $data1 = array();
-        foreach ($data as $id => $hotel) {
-            foreach ($dataBlockAvailability as $element) {
-                if($element['hotel_id']==$hotel['hotel_id'])
+        foreach ($data as $element) {
+            foreach ($prices as $price) {
+                if($price['min']<=$element['minPrice'])
                 {
-                    $minPrice = OneHotelView::getMinFilterPrice($element['block']);
-                    $hit=0;
-                    foreach ($prices as $price) {
-                        if($price['min']<=$minPrice)
-                        {
-                            if($price['max']===null or $minPrice<=$price['max'])
-                            {
-                                $hit=1;
-                            }
-                        }
-                    }
-                    if($hit==1)
+                    if($price['max']===null or $element['minPrice']<=$price['max'])
                     {
-                        $data1[$id] = $hotel;
+                        $data1[] = $element;
                     }
                 }
             }

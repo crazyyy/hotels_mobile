@@ -30,7 +30,7 @@ if (env === 'development'){
  
 jsSources = ['sorces/js/*.js'];
 htmlSources = [outputDir + '*.html'];
-sassSources = ['site/sass/**/*.sass'];
+sassSources = ['site/sass/**/*.scss'];
  
 //sass task
 gulp.task('sass', function() {

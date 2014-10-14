@@ -27,10 +27,20 @@ class SearchController extends Controller
         $currentTimeStamp=$currentDate->getTimestamp();
         if(isset($_GET['s'])){
             $s=strip_tags($_GET['s']);
-            if( $isGoodArrivalDate){
+            if(isset($_GET['is_href']))
+            {
+                $is_href = true;
+            } else {
+                $is_href = false;
+            }
+            if( $isGoodArrivalDate ){
+                if($is_href and $arriveDateFromSession)
+                {
+                    $arrivalDate=$arriveDateFromSession;
+                } else {
                     $arrivalDate=$_GET['month_year_arr']."-".$_GET['day_arr'];
                     Yii::app()->session['arrival_date']=$arrivalDate;
-
+                }
             }else if($arriveDateFromSession){
                 $arrivalDate=$arriveDateFromSession;
             }
@@ -51,16 +61,20 @@ class SearchController extends Controller
             }
 
             if($isGoodDepartureDate){
+                if($is_href and $arriveDateFromSession)
+                {
+                    $departureDate=$departDateFromSession;
+                } else {
                     $departureDate=$_GET['month_year_dep']."-".$_GET['day_dep'];
                     Yii::app()->session['departure_date']= $departureDate;
-
+                }
             }else if($departDateFromSession){
-                    $departureDate=$departDateFromSession;
+                $departureDate=$departDateFromSession;
             }
             if($departureDate){
                 $departureDateObj=new DateTime($departureDate);
                 $departureDateTimeStamp=$departureDateObj->getTimestamp();
-                if($arrivalDateTimeStamp>=$departureDateTimeStamp){
+                if(isset($arrivalDateTimeStamp) and $arrivalDateTimeStamp>=$departureDateTimeStamp){
                     $error='Дата отъезда должна быть большей, чем дата приезда';
                 }else{
                      $goodSign++;
@@ -72,7 +86,12 @@ class SearchController extends Controller
             }
 
         }
-        $this->render('index',array('data'=>$data,'s'=>$s,'error'=>$error));
+
+        $parameters['day_arr'] = isset($_GET['day_arr'])?$_GET['day_arr']:null;
+        $parameters['month_year_arr'] = isset($_GET['month_year_arr'])?$_GET['month_year_arr']:null;
+        $parameters['day_dep'] = isset($_GET['day_dep'])?$_GET['day_dep']:null;
+        $parameters['month_year_dep'] = isset($_GET['month_year_dep'])?$_GET['month_year_dep']:null;
+        $this->render('index',array('data'=>$data,'s'=>$s,'error'=>$error, 'parameters'=>$parameters));
 	}
 
 

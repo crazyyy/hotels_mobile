@@ -226,18 +226,152 @@ class HotelsController extends Controller
 
     public function actionByCity()
     {
+        $this->cityOrRegion($isCity = true);
+    }
+
+    public function actionByRegion()
+   	{
+        $this->cityOrRegion($isCity = false);
+   	}
+
+    public function cityOrRegion($isCity)
+    {
         $data=array();
         $ids=Yii::app()->session['cityHotelsIds'];
         $label=null;
 
-        $id = null;
+        $cityId = $id = null;
         if(isset($_GET['id']) and $_GET['id']!=null){
-            $id=intval($_GET['id']);
-            if(isset($ids['cityId-'.$id]))
-                $label=$ids['cityId-'.$id];
-            $arrival_date=Yii::app()->session['arrival_date'];
-            $departure_date=Yii::app()->session['departure_date'];
-            $data=Service::getBlockAvailability(null,$id,null,$arrival_date,$departure_date);
+            $cityId = $id=intval($_GET['id']);
+            if($isCity)
+            {
+                if(isset($ids['cityId-'.$id]))
+                    $label=$ids['cityId-'.$id];
+            } else {
+                if(isset($ids['regionId-'.$id]))
+                    $label=$ids['regionId-'.$id];
+            }
+//            $arrival_date=Yii::app()->session['arrival_date'];
+//            $departure_date=Yii::app()->session['departure_date'];
+
+            $month_year_arr=isset($_GET['month_year_arr'])?$_GET['month_year_arr']:null;
+            $day_arr= isset($_GET['day_arr'])?$_GET['day_arr']:null;
+            $month_year_dep= isset($_GET['month_year_dep'])?$_GET['month_year_dep']:null;
+            $day_dep= isset($_GET['day_dep'])?$_GET['day_dep']:null;
+
+            $arrival_date = $month_year_arr.'-'.$day_arr;
+            $departure_date = $month_year_dep.'-'.$day_dep;
+            Yii::app()->session['arrival_date']=$arrival_date;
+            Yii::app()->session['departure_date']=$departure_date;
+
+            if($isCity)
+            {
+                $data=Service::getBlockAvailability(null,$id,null,$arrival_date,$departure_date);
+            } else {
+                $data=Service::getBlockAvailability(null,null,$id,$arrival_date,$departure_date);
+            }
+
+            if(!$data['data'])
+            {
+                $error = $data['msg'];
+                return $this->render('//search/index',array('data'=>null,'s'=>null,'error'=>$error));
+            }
+
+            foreach ($data['data'] as $id => &$hotel) {
+                $minPrice = OneHotelView::getMinPrice($hotel['block']);
+                $hotel['minPrice'] = $minPrice;
+            }
+
+            if(isset($_GET['price']))
+            {
+                $filters['price'] = $_GET['price'];
+            }
+            if(isset($_GET['class']))
+            {
+                $filters['class'] = $_GET['class'];
+            }
+            if(isset($_GET['facility']))
+            {
+                $filters['facility'] = $_GET['facility'];
+            }
+            if(isset($_GET['hotel_type']))
+            {
+                $filters['hotel_type'] = $_GET['hotel_type'];
+            }
+            if(isset($filters))
+            {
+                $data['data'] = Filters::getFilteringHotels($data, $filters);
+            }
+
+            $hotelsIds = array();
+            foreach ($data['data'] as $hotel) {
+                $hotelsIds[] = $hotel['hotel_id'];
+            }
+
+            $reviewBest = Service::getReviewBest($hotelsIds);
+
+            if(count($reviewBest))
+            {
+                foreach ($reviewBest as $key=>$review) {
+                    foreach ($data['data'] as &$hotel) {
+                        if($key==$hotel['hotel_id'])
+                        {
+                            $hotel['review'] = round($review['rating'],1);
+                        }
+                    }
+                }
+            }
+
+            if(isset($_GET['sortBy']))
+            {
+                $sortBy = $_GET['sortBy'];
+                // 1 - Рекомендуемые
+                // 2 - Цена
+                // 3 - Оценка гостей
+                // 4 - Рейтинг от Hotels24.ua
+                if($sortBy == 1){
+                    ;
+                } elseif ($sortBy == 2){
+                    usort($data['data'], function($a, $b)
+                        {
+                            if($a['minPrice'] < $b['minPrice'])
+                            {
+                                return -1;
+                            } elseif ($a['minPrice'] > $b['minPrice']){
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        });
+                } elseif ($sortBy == 3){
+                    usort($data['data'], function($a, $b)
+                        {
+                            if(isset($a['review']) and isset($b['review']))
+                            {
+                                if($a['review'] == $b['review'])
+                                {
+                                    return 0;
+                                }
+                                return ($a['review'] > $b['review']) ? -1 : 1;
+                            } elseif (isset($a['review'])){
+                                return -1;
+                            } elseif (isset($b['review'])) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        });
+                } elseif ($sortBy == 4){
+                    usort($data['data'], function($a, $b)
+                        {
+                            if($a['hotel_rating'] == $b['hotel_rating'])
+                            {
+                                return 0;
+                            }
+                            return ($a['hotel_rating'] > $b['hotel_rating']) ? -1 : 1;
+                        });
+                }
+            }
         }
 
         if(isset($_GET['page'])){
@@ -258,30 +392,14 @@ class HotelsController extends Controller
             }
         }
 
-        $this->render('list',array(
+        return $this->render('list',array(
                 'limit'=>$limit,
                 'page'=>$page,
-                'cityId'=>$id,
+                'cityId'=>$cityId,
                 'data'=>$data,
                 'label'=>$label,
                 'dataPagination' => $dataPagination
             ));
     }
-
-    public function actionByRegion()
-   	{
-        $data=array();
-        $ids=Yii::app()->session['cityHotelsIds'];
-        $label=null;
-        if(isset($_GET['id'])){
-            $id=intval($_GET['id']);
-            if(isset($ids['regionId-'.$id]))
-                $label=$ids['regionId-'.$id];
-            $arrival_date=Yii::app()->session['arrival_date'];
-            $departure_date=Yii::app()->session['departure_date'];
-            $data=Service::getBlockAvailability(null,null,$id,$arrival_date,$departure_date);
-        }
-        $this->render('list',array('data'=>$data,'label'=>$label));
-   	}
 
 }

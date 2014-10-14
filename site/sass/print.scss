@@ -1,0 +1,119 @@
+/* -----------------------------------------------------------------------
+ * Blueprint CSS Framework 1.0.1
+ * http://blueprintcss.org
+ *
+ *   * Copyright (c) 2007-Present. See LICENSE for more info.
+ *   * See README for instructions on how to use Blueprint.
+ *   * For credits and origins, see AUTHORS.
+ *   * This is a compressed file. See the sources in the 'src' directory.
+ *----------------------------------------------------------------------- */
+
+/* print.css */
+
+body
+{
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+
+    color: #000;
+    background: none;
+}
+
+.container
+{
+    background: none;
+}
+
+hr
+{
+    width: 100%;
+    height: 2px;
+    margin: 2em 0;
+    padding: 0;
+
+    color: #ccc;
+    border: none;
+    background: #ccc;
+    &.space
+    {
+        visibility: hidden;
+
+        color: #fff;
+        background: #fff;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+    font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
+}
+
+code
+{
+    font: .9em 'Courier New', Monaco, Courier, monospace;
+}
+
+a img
+{
+    border: none;
+}
+
+p img.top
+{
+    margin-top: 0;
+}
+
+blockquote
+{
+    font-size: .9em;
+    font-style: italic;
+
+    margin: 1.5em;
+    padding: 1em;
+}
+
+.small
+{
+    font-size: .9em;
+}
+
+.large
+{
+    font-size: 1.1em;
+}
+
+.quiet
+{
+    color: #999;
+}
+
+.hide
+{
+    display: none;
+}
+
+a
+{
+    &:link,
+    &:visited
+    {
+        font-weight: 700;
+
+        text-decoration: underline;
+
+        background: transparent;
+    }
+    &:link:after,
+    &:visited:after
+    {
+        font-size: 90%;
+
+        content: ' (' attr(href) ')';
+    }
+}

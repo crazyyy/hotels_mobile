@@ -2,7 +2,7 @@
 
 class SearchResultView
 {
-    public static function render($key,$data){
+    public static function render($key,$data,$parameters = array()){
 
             if($key=='cities')
             {
@@ -21,7 +21,7 @@ class SearchResultView
                 $img='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEzSURBVHjaYvH29v7PQAFggdKMZOr/z8RAIaDYABZkzpw5czLFxcWPffz48eKDBw8Yjhw5wrBgwQIGDg4Ohl+/fjGwsrIy8PPzMzAxMWF3QV5eXvXDhw89z549y8DCwkK6F86dO/fv3bt3IDFtIJbFot4R5FCcBggICLAeP348JScn58Lq1atX8PDwyMEVAp1969Ytrl27dtnhDIMXL16wAp0vYWRkxHD//n3Ta9euzePm5r739+9fdkZGxn/CwsK6P3/+5MFpwOvXr/+vW7eOgZ2d/R8QsACxMzMzszM4oTAyMgD5IPwWpwFCQkJf7ezsaj58+LALGPJM//8jEinQgN83b94Munv3bh5OAyIjIx8aGhpeXrJkyX1sIS4nJ3teUlLyIrIYIzQvDIOkTHaWBggwALjfdA3njsxpAAAAAElFTkSuQmCC';
                 $prop='hotelCity';
             }
-            Yii::app()->getController()->renderPartial('oneResult',array('label'=>$label,'img'=>$img,'prop'=>$prop,'data'=>$data));
+            Yii::app()->getController()->renderPartial('oneResult',array('label'=>$label,'img'=>$img,'prop'=>$prop,'data'=>$data,'parameters'=>$parameters));
 
     }
 

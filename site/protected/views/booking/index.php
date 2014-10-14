@@ -1,3 +1,7 @@
+<?
+/* @var $form CActiveForm  */
+/* @var $booking BookingForm */
+?>
 <div class="main_wrapper">
 
     <div class="bron_info">
@@ -33,11 +37,33 @@
             ? грн</div>
     </div>
 <div class="bron_form">
-    <form action="/booking/card" method="post">
+    <?php $form=$this->beginWidget('CActiveForm', array(
+        'id'=>'booking-form',
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+            'validateOnSubmit'=>true,
+        ),
+    )); ?>
         <ul>
-            <li><input type="text" required="" class="floatL w170" placeholder="Имя"><input type="text" required="" class="floatR w45p" placeholder="Фамилия"></li>
-            <li><input type="email" required="" class="floatL w100p" placeholder="E-mail">
+            <li>
+                <?= $form->textField($booking, 'firstName', array(
+                    'placeholder' => $booking->getAttributeLabel('firstName'),
+                    'class' => 'floatL w170'
+                )) ?>
+                <?= $form->error($booking, 'firstName') ?>
+                <?= $form->textField($booking, 'lastName', array(
+                    'placeholder' => $booking->getAttributeLabel('lastName'),
+                    'class' => 'floatR w45p'
+                )) ?>
+                <?= $form->error($booking, 'lastName') ?>
+            </li>
+            <li>
+                <?= $form->textField($booking, 'email', array(
+                    'placeholder' => $booking->getAttributeLabel('email'),
+                    'class' => 'floatL w100p'
+                )) ?>
                 <strong>Мы пришлем Вам информацию по бронированию</strong>
+                <?= $form->error($booking, 'email') ?>
             </li>
             <li>
                 <div class="select-style w170">
@@ -46,19 +72,33 @@
                         <option>+38 (Украина)</option>
                     </select>
                 </div>
-                <input type="text" required="" class="floatR w45p" placeholder="Номер телефона">
+                <?= $form->textField($booking, 'phone', array(
+                    'placeholder' => $booking->getAttributeLabel('phone'),
+                    'class'       => 'floatR w45p',
+                    'maxlength'   => 10
+                )) ?>
+                <?= $form->error($booking, 'phone') ?>
             </li>
-            <li><label class="for-checkbox">
-                    <input type="checkbox" checked="" class="padR10" value="windows" name="">
-                    <span class="soglasen">Я согласен с условиями <a href="#"><span>публичной оферты</span></a> и <a href="#"><span>соглашении о конфиденциальности</span></a> </span>
-                </label></li>
+            <li>
+                <label class="for-checkbox">
+                    <?= $form->checkBox($booking, 'rulesAccepted', array(
+                        'class' => 'padR10'
+                    )) ?>
+                    <span class="soglasen">Я согласен с условиями <a href="#">
+                            <span>публичной оферты</span></a> и <a href="#"><span>соглашении о конфиденциальности</span></a>
+                    </span>
+                    <?= $form->error($booking, 'rulesAccepted') ?>
+                </label>
+            </li>
         </ul>
 
         <div class="center padT10 padB10">
             <div>
-                <button class="button" type="submit">
-                    Далее <img height="38px" class="v-aM marL70" alt="" src="/images/big_str.png">
-                </button>
+                <input type="submit" class="button" value="Далее">
+<!--                <button class="button" type="submit">-->
+<!--                    Далее <img height="38px" class="v-aM marL70" alt="" src="/images/big_str.png">-->
+<!--                </button>-->
+
 <!--                <a href="#">-->
 <!--                    <div class="button">-->
 <!--                        Далее <img height="38px" class="v-aM marL70" alt="" src="/images/big_str.png">-->
@@ -70,7 +110,7 @@
             Гарантия лучшей цены!</span></div>
 
         </div>
-    </form>
+    <?php $this->endWidget(); ?>
 </div>
 
 

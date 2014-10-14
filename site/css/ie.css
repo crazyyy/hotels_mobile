@@ -16,12 +16,36 @@ body {
   text-align: left;
 }
 
-* html .column, * html .span-1, * html .span-2, * html .span-3, * html .span-4, * html .span-5, * html .span-6, * html .span-7, * html .span-8, * html .span-9, * html .span-10, * html .span-11, * html .span-12, * html .span-13, * html .span-14, * html .span-15, * html .span-16, * html .span-17, * html .span-18, * html .span-19, * html .span-20, * html .span-21, * html .span-22, * html .span-23, * html .span-24 {
+* html .column,
+* html .span-1,
+* html .span-2,
+* html .span-3,
+* html .span-4,
+* html .span-5,
+* html .span-6,
+* html .span-7,
+* html .span-8,
+* html .span-9,
+* html .span-10,
+* html .span-11,
+* html .span-12,
+* html .span-13,
+* html .span-14,
+* html .span-15,
+* html .span-16,
+* html .span-17,
+* html .span-18,
+* html .span-19,
+* html .span-20,
+* html .span-21,
+* html .span-22,
+* html .span-23,
+* html .span-24 {
   display: inline;
   overflow-x: hidden;
 }
 * html legend {
-  margin: 0px -8px 16px 0;
+  margin: 0 -8px 16px 0;
   padding: 0;
 }
 
@@ -45,11 +69,13 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
-.clearfix, .container {
+.clearfix,
+.container {
   display: inline-block;
 }
 
-* html .clearfix, * html .container {
+* html .clearfix,
+* html .container {
   height: 1%;
 }
 
@@ -58,9 +84,9 @@ fieldset {
 }
 
 legend {
-  margin-top: -0.2em;
+  margin-top: -.2em;
   margin-bottom: 1em;
-  margin-left: -0.5em;
+  margin-left: -.5em;
 }
 
 textarea {
@@ -68,50 +94,53 @@ textarea {
 }
 
 label {
-  vertical-align: middle;
   position: relative;
-  top: -0.25em;
+  top: -.25em;
+  vertical-align: middle;
 }
 
 input.text, input.title {
-  background-color: #fff;
   border: 1px solid #bbb;
+  background-color: #fff;
 }
 
 textarea {
-  background-color: #fff;
   border: 1px solid #bbb;
+  background-color: #fff;
 }
 
 input.text:focus, input.title:focus {
   border-color: #666;
 }
 input.text, input.title {
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 
-textarea, select {
-  margin: 0.5em 0;
+textarea,
+select {
+  margin: .5em 0;
 }
 
 input.checkbox, input.radio {
   position: relative;
-  top: 0.25em;
+  top: .25em;
 }
 
-form.inline div, form.inline p {
+form.inline div,
+form.inline p {
   vertical-align: middle;
 }
 form.inline input.checkbox, form.inline input.radio, form.inline input.button {
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 form.inline button {
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 
-button, input.button {
+button,
+input.button {
   position: relative;
-  top: 0.25em;
+  top: .25em;
 }
 
 /*# sourceMappingURL=ie.css.map */
