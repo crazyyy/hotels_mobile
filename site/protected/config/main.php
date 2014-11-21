@@ -5,6 +5,16 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+
+$_envMap = [
+    'production' => 'ua',
+    'staging' => 'stage',
+    'testing' => 'test',
+    'development' => 'dev'
+];
+
+$env = defined('APPLICATION_ENV') ? $_envMap[APPLICATION_ENV] : 'dev';
+
 return array(
     'language' => 'ru',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -16,6 +26,7 @@ return array(
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
+        'application.models.booking.*',
 		'application.components.*',
 		'application.helpers.*',
 	),
@@ -100,25 +111,25 @@ return array(
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
-        'api'=>array(
-                'server1'=>'http:api.test.hotels24.ua/',
-                'server2'=>'http://hotels24.ua/',
-                'production'=>'http://api.test.hotels24.ua/',
-                'productionAjax'=>'http://hotels24.ua/',
-                'urlBlockAvalability'=>'legacy/getBlockAvailability',
-                'urlHotelInfo'=>'hotel/hotel-info/',
-                'urlHotelPhoto'=>'hotel/photo',
-                'urlHotelFacilities'=>'hotel/facilities',
-                'urlRoom'=>'room',
-                'urlRoomPhoto'=>'room/photo',
-                'urlCity'=>'city/info',
-                'urlRegion'=>'region',
-                'ajaxUrl'=>"ajax.php"
+	'params' => array(
+        // this is used in contact page
+        'adminEmail' => 'webmaster@example.com',
+        'api' => array(
+            'server1' => 'http:api.hotels24.dev/',
+            'server2' => sprintf('http://hotels24.%s/', $env),
+            'production' => sprintf('http://api.hotels24.%s/', $env),
+            'productionAjax' => sprintf('http://hotels24.%s/', $env),
+            'urlBlockAvalability' => 'legacy/getBlockAvailability',
+            'urlHotelInfo' => 'hotel/hotel-info/',
+            'urlHotelPhoto' => 'hotel/photo',
+            'urlHotelFacilities' => 'hotel/facilities',
+            'urlRoom' => 'room',
+            'urlRoomPhoto' => 'room/photo',
+            'urlCity' => 'city/info',
+            'urlRegion' => 'region',
+            'ajaxUrl' => "ajax.php"
 
         )
-	),
+    )
 
 );

@@ -141,7 +141,7 @@ class OneHotelView
 //        $dataHotelInfo['hotel_photo'] = $hotel_photo;
 //
 //        $hotel_photo = self::imageSrc($dataHotelInfo['hotel_photo']);
-        $url = $dataHotelInfo['hotel_photo_url']['url_square100'];
+        $url = isset($dataHotelInfo['hotel_photo_url']['url_square100']) ? $dataHotelInfo['hotel_photo_url']['url_square100'] : '';
         $url = str_replace('img.hotels24.prod', 'img.hotels24.ua', $url);
         return $url;
     }

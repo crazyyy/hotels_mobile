@@ -74,12 +74,15 @@ class SiteController extends Controller
                 $urlFilter = '';
             }
 
-            $this->redirect($_GET['referer'].$urlFilter);
+            $this->redirect(urldecode($_GET['referer']).$urlFilter);
         } else {
             $referer='/';
             if(isset($_SERVER['HTTP_REFERER']))
                 $referer=$_SERVER['HTTP_REFERER'];
-            $this->render('filter', array('referer'=>$referer));
+
+            $this->render('filter', array(
+                    'referer'=>urlencode($referer),
+                ));
         }
     }
 

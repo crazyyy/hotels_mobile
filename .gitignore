@@ -1,0 +1,14 @@
+/.sass-cache
+/node_modules
+syntax:glob
+/.idea
+*.orig
+*.php~
+*.log
+*.sublime-project
+*.sublime-workspace
+sftp-config.*
+config.rb
+/.git
+/.hg
+/_gsdata_

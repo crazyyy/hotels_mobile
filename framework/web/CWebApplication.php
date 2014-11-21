@@ -283,8 +283,10 @@ class CWebApplication extends CApplication
 			$this->_controller=$oldController;
 		}
 		else
+        {
 			throw new CHttpException(404,Yii::t('yii','Unable to resolve the request "{route}".',
 				array('{route}'=>$route===''?$this->defaultController:$route)));
+        }
 	}
 
 	/**
@@ -333,7 +335,6 @@ class CWebApplication extends CApplication
 						$this->parseActionParams($route),
 					);
 				}
-
 				if(($module=$owner->getModule($id))!==null)
 					return $this->createController($route,$module);
 
@@ -351,7 +352,9 @@ class CWebApplication extends CApplication
 			if(is_file($classFile))
 			{
 				if(!class_exists($className,false))
+                {
 					require($classFile);
+                }
 				if(class_exists($className,false) && is_subclass_of($className,'CController'))
 				{
 					$id[0]=strtolower($id[0]);

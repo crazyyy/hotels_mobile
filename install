@@ -1,7 +1,7 @@
 #!/bin/bash
 # This script configures FS privileges for Symfony2 project.
 
-APP_PATH=/home/developer/www/mercurial/hotels_mobile
+APP_PATH=/var/www/hotels_mobile
 
 HTTP_USER=www-data
 CLI_USER=developer

@@ -1,24 +1,29 @@
 <!-- not ready - what page? -->
-<? if($dataHotelInfo!=null and count($dataHotelInfo)) { ?>
-    <div class="hotel_info">
-        <a href="/hotels/info/?id=<?=$dataHotelInfo['hotel_id']?>">
-            <img alt="hotel" class="v-aM floatL index"
-                 src=<?=$dataHotelInfo['hotel_photo']?>
-                >
+<?php if ($dataHotelInfo != null and count($dataHotelInfo)) { ?>
+    <div class="hotel_info 33333333333">
+        <a href="/hotels/info/?id=<?= $dataHotelInfo['hotel_id'] ?>">
+            <img alt="hotel" class="v-aM floatL index" src=<?= $dataHotelInfo['hotel_photo'] ?>>
         </a>
-        <div class="floatR bal">Потрясающе,
-            <div class="ocenka"><?=$dataHotelInfo['review']?></div>
+
+        <div class="ratings">
+            <?php if (isset($dataHotelInfo['review'])) { ?>
+                <p>Потрясающе, <span><?= $dataHotelInfo['review'] ?></span></p>
+            <?php } ?>
         </div>
+        <!-- ratings -->
+
         <div class="rating clearfix">
-            <? for($index=1; $index<=$dataHotelInfo['class']; $index++) { ?>
+            <?php for ($index = 1; $index <= $dataHotelInfo['class']; $index++) { ?>
                 <span></span>
-            <? } ?>
+            <?php } ?>
         </div>
+
         <div class="name">
-            <a href="/hotels/info/?id=<?=$dataHotelInfo['hotel_id']?>"><?=$dataHotelInfo['name']?></a>
+            <a href="/hotels/info/?id=<?= $dataHotelInfo['hotel_id'] ?>"><?= $dataHotelInfo['name'] ?></a>
         </div>
-        <div class="adress"><?=$dataHotelInfo['address']?></div>
-        <div class="cena"><i>от <?=$dataHotelInfo['min_price']?></i></div>
+
+        <div class="adress"><?= $dataHotelInfo['address'] ?></div>
+        <div class="cena"><i>от <?= $dataHotelInfo['min_price'] ?></i></div>
         <div class="plashka"></div>
     </div>
-<? } ?>
+<?php } ?>

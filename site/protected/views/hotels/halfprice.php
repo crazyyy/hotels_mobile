@@ -9,37 +9,39 @@
             <option>Львов (223)</option>
             <option>Крым (наш)</option>
         </select>
-    </div><!-- skidka_wrapper -->
-    <?if(isset($data)&&isset($data['data'])&&isset($dataPagination)){?>
-    <div class="hotel_list">
-        <?foreach($dataPagination as $key=>$oneHotel):?>
-            <?
+    </div>
+    <!-- skidka_wrapper -->
+    <?php if (isset($data) && isset($data['data']) && isset($dataPagination)) { ?>
+        <div class="hotel_list">
+            <?php foreach ($dataPagination as $key => $oneHotel): ?>
+                <?
                 OneHotelView::renderHalfPrice($oneHotel);
-            ?>
-        <?endforeach?>
-    </div>
-    <table class="paginator">
-        <tr>
-            <td>
-                <? if($page>0){ ?>
-                <a href="/hotels/halfprice?page=<? echo $page-1; ?>">Предыдущая</a>
-                <? } ?>
-            </td>
-            <td>
-                <? $maxLimit = ceil(count($data['data'])/$limit)-1;
-                if($page < $maxLimit) { ?>
-                    <a href="/hotels/halfprice?page=<? echo $page+1; ?>">Следующая</a>
-               <? } ?>
-           </td>
-        </tr>
-    </table><!-- paginator -->
-    <div class="pagilist">
-        <p>Страница: <?=$page+1?> из <? echo ceil(count($data['data'])/$limit)?></p>
-    </div>
+                ?>
+            <?php endforeach ?>
+        </div>
+        <table class="paginator">
+            <tr>
+                <td>
+                    <?php if ($page > 0) { ?>
+                        <a href="/hotels/halfprice?page=<?php echo $page - 1; ?>">Предыдущая</a>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php $maxLimit = ceil(count($data['data']) / $limit) - 1;
+                    if ($page < $maxLimit) {
+                        ?>
+                        <a href="/hotels/halfprice?page=<?php echo $page + 1; ?>">Следующая</a>
+                    <?php } ?>
+                </td>
+            </tr>
+        </table><!-- paginator -->
+        <div class="pagilist">
+            <p>Страница: <?= $page + 1 ?> из <?php echo ceil(count($data['data']) / $limit) ?></p>
+        </div>
 
-     <?}else{?>
+    <?php } else { ?>
         <div class="no_result">
             <p>Нет результатов</p>
         </div>
-    <?}?>
+    <?php } ?>
 </div><!-- main_wrapper -->

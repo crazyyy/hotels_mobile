@@ -39,6 +39,7 @@ class Service
     );
 
     public static  function request($host,$url,$params=array(), $options = array()){
+
         $curl = Yii::app()->curl;
         /* @var $curl Curl */
 
@@ -111,13 +112,15 @@ class Service
         if(isset($city_ids))
             $params['city_ids']=$city_ids;
         if(isset($region_ids))
-            $params['Region_ids']=$region_ids;
-        try{
+            $params['region_ids']=$region_ids;
+
+        if(!$arrival_date || !$departure_date) {
+            throw new Exception(
+                'Missed require params! Please check dates and try again'
+            );
+        } else {
             $params['arrival_date']=$arrival_date;
-            $params['departure_date']=$departure_date;
-        }
-        catch(Exception $e){
-            die('missed require params!');
+            $params['departure_date'] = $departure_date;
         }
         if(isset($hoteltype_id))
          $params['hoteltype_id']=$hoteltype_id;
@@ -126,6 +129,7 @@ class Service
 
         $data=self::request(Yii::app()->params->api['production'],Yii::app()->params->api['urlBlockAvalability'],$params, array(
                 'cache' => 300,
+//                'cache' => null,
 //                'useApiKey' => true
             ));
         return $data;
@@ -152,7 +156,7 @@ class Service
 
         $data=self::request(Yii::app()->params->api['production'],Yii::app()->params->api['urlHotelInfo'],$params, array(
             'cache' => 300,
-            'useApiKey' => true
+            'useApiKey' => false
         ));
         return $data;
     }
@@ -260,35 +264,19 @@ class Service
 
     public static function booking($data)
     {
-        $data = array(
-            'arrivalDate'   => (new \DateTime())->format('Y-m-d'),
-            'departureDate' => (new \DateTime("+1 days"))->format('Y-m-d'),
-            'blocks'        => array(
-                array(
-                    'id'         => 1,
-                    'tariff'     => '5425476b6b06784d498b4567',
-                    'totalCost'  => 400,
-                    'living'     => [],
-                    'conditions' => array(
-                        'cancellation'  => 1001,
-                        'bookingMethod' => 3
-                    ),
-                )
-            ),
-            'requisites'    => array(
-                'fistName' => 'TestFirstName',
-                'lastName' => 'TestLastName',
-                'email'    => 'test.email@hotels24.ua',
-                'phone'    => '+3805555555'
-            ),
-            'nextState' => 'preRequisites',
-        );
 
-        $response = Yii::app()->curl->post('http://api.test.hotels24.ua/test/fast-booking', array(
+        $uri = sprintf('%s/booking/hotel', Yii::app()->params->api['production']);
+
+        $response = Yii::app()->curl->post($uri, array(
             'request' => json_encode($data)
         ));
         $data = json_decode($response, true);
-        return $data;
+        if(!isset($data['data'])) {
+            throw new Exception('Data is not received');
+        } elseif((int)$data['ok'] !== 1) {
+            throw new Exception($data['msg']);
+        }
+        return $data['data'];
     }
 
 
@@ -308,5 +296,43 @@ class Service
         ));
 
         return $response['data'];
+    }
+
+    /**
+     * Getting data for platon iframe from payment link.
+     * For iframe need data with meets the specifications.
+     *
+     * @param string $paymentUrl
+     * @param string $successUtl
+     * @param string $errorUrl
+     * @throws CHttpException
+     * @throws Exception
+     * @return array
+     */
+    public static function getPlatonData($paymentUrl, $successUtl, $errorUrl) {
+
+        $submitUrl = http_build_url(
+            $paymentUrl,
+            [
+                //need for redirect after payments
+                'query' => http_build_str([
+                    'redirectSuccess' => $successUtl,
+                    'redirectError' => $errorUrl
+                ])
+            ]
+        );
+
+        try {
+            $response = self::request($submitUrl, '', [], ['cache' => 0, 'useApiKey' => true]);
+        } catch(CHttpException $e) {
+            throw $e;
+        }
+
+        if(!isset($response['data']) || empty($response['data'])) {
+            throw new CHttpException(404, 'Payment data not recived');
+        }
+
+        return $response['data'];
+
     }
 }

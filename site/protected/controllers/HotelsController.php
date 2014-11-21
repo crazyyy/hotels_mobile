@@ -93,6 +93,12 @@ class HotelsController extends Controller
 
         $roomsApi = Service::getBlockAvailability($hotel['hotel_id'], null, null, $session['arrival_date'], $session['departure_date']);
 
+        if(!$roomsApi['data'])
+        {
+            $error = $roomsApi['msg'];
+            return $this->render('//search/index',array('data'=>null,'s'=>null,'error'=>$error));
+        }
+
         if ($roomsApi['data']) {
             $rooms = array();
             foreach ($roomsApi['data'] as $block) {
@@ -238,7 +244,7 @@ class HotelsController extends Controller
     {
         $data=array();
         $ids=Yii::app()->session['cityHotelsIds'];
-        $label=null;
+        $label='none';
 
         $cityId = $id = null;
         if(isset($_GET['id']) and $_GET['id']!=null){
